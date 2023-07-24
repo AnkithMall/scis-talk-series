@@ -17,7 +17,7 @@ const Header = () => (
             </Navbar.Brand>
             <div className="flex md:order-2">
                 <Button>
-                    Register Now
+                    Feedback
                 </Button>
                 <Navbar.Toggle />
             </div>
