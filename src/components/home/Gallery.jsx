@@ -16,9 +16,9 @@ const Gallery = (props) => {
         <>
             <div className="grid gap-4 bg-[#a2d2ff]" id="gallery">
                 <div className="text-center font-bold text-4xl pt-6">Gallery</div>
-                <div className="grid grid-cols-3 mb-9 h-[270px] sm:h-[530px]">
+                <div className="grid grid-cols-3 mb-9 h-[170px] sm:h-[350px] lg:h-[530px]">
                     <div className="m-7 col-span-2 ">
-                        <a href={pic}><img className="h-[12rem] sm:h-[27rem] w-full rounded-lg shadow-[rgba(0,0,0,0.25)_0px_14px_28px,rgba(0,0,0,0.22)_0px_10px_10px] cursor-pointer" src={pic} alt=""/></a>
+                        <a href={pic}><img className="aspect-video w-full rounded-lg shadow-[rgba(0,0,0,0.25)_0px_14px_28px,rgba(0,0,0,0.22)_0px_10px_10px] cursor-pointer" src={pic} alt=""/></a>
                     </div>
                     <div className="col-span-1 h-[95%] sm:h-[99.9%] overflow-y-scroll ">
                         <div className="flex flex-col ">
