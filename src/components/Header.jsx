@@ -15,9 +15,11 @@ const Header = () => (
                     SCIS Talk Series
                 </span>
             </Navbar.Brand>
-            <div className="flex md:order-2">
+            <div className="flex md:order-2 font-bold">
                 <Button>
-                    Feedback
+                    <a href="#schedule" className='font-bold'>
+                        Schedule
+                    </a>    
                 </Button>
                 <Navbar.Toggle />
             </div>
@@ -26,21 +28,27 @@ const Header = () => (
                     active
                     href="#home"
                 >
-                    <p>
+                    <span className='font-bold'>
                         Home
-                    </p>
+                    </span>
                 </Navbar.Link>
                 <Navbar.Link href="#about">
-                    About
+                    <span className='font-bold'>
+                        About
+                    </span>
                 </Navbar.Link>
                 <Navbar.Link href="#speaker">
-                    Speaker
+                    <span className='font-bold' >
+                        Speaker
+                    </span>
                 </Navbar.Link>
-                <Navbar.Link href="#schedule">
+                {/* <Navbar.Link href="#schedule">
                     Schedule
-                </Navbar.Link>
+                </Navbar.Link> */}
                 <Navbar.Link href="#gallery">
-                    Gallery
+                    <span className='font-bold' >
+                        Gallery
+                    </span>
                 </Navbar.Link>
             </Navbar.Collapse>
         </Navbar>

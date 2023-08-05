@@ -10,7 +10,7 @@ const Schedule = (props) => {
 
     useEffect(() => {
         const getUpcomingEvents = () => {
-            const currentDate = new Date('2023-04-11');
+            const currentDate = new Date();
             // console.log('current date => ',currentDate)
             const upcomingEvents = props.data.filter((event) => {
                 const eventDate = new Date(event.attributes.date);
@@ -26,7 +26,7 @@ const Schedule = (props) => {
         setUpcomingTalks(getUpcomingEvents);
 
         const getPastEvents = () => {
-            const currentDate = new Date('2023-04-11');
+            const currentDate = new Date();
             // console.log('current date => ',currentDate)
             const pastEvents = props.data.filter((event) => {
                 const eventDate = new Date(event.attributes.date);

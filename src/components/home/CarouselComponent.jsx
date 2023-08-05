@@ -1,10 +1,29 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 const CarouselComponent = (props) => {
   const carouselRef = useRef(null);
+  const [upcomingTalks, setUpcomingTalks] = useState([]);
 
-  if (props.data.length === 0) {
-    return <div>loading...</div>
-  }
+  useEffect(() => {
+    const getUpcomingEvents = () => {
+      const currentDate = new Date();
+      // console.log('current date => ',currentDate)
+      const upcomingEvents = props.data.filter((event) => {
+        const eventDate = new Date(event.attributes.date);
+        //   console.log('event date =>',eventDate)
+        // console.log('return =>', eventDate >= currentDate)
+
+        return (eventDate >= currentDate);
+      });
+      // console.log('upcoming event => ',upcomingEvents)
+
+      return upcomingEvents.sort((a, b) => new Date(a.attributes.date) - new Date(b.attributes.date));
+    };
+    setUpcomingTalks(getUpcomingEvents);
+  }, [props.data])
+  // if (props.data.length === 0) {
+  //   return <div>loading...</div>
+  // }
+
 
   const handlePrevious = () => {
     // carouselRef.current.style.transform = `translateX(101vw)`;
@@ -27,20 +46,31 @@ const CarouselComponent = (props) => {
   return (
     <div id="home" className="flex relative w-full">
       <div ref={carouselRef} className="carousel snap-x snap-mandatory flex items-center w-[500%] h-[300px] sm:h-[550px] overflow-scroll scroll-smooth">
-        {props.data.map((item, idx) => {
-          return (
-            <div className="snap-center snap-always flex items-center w-full bg-scroll bg-center bg-cover bg-no-repeat bg-center bg-[url('/asset/pexels-alex-knight-2599244.jpg')] bg-gray-500 bg-blend-multiply h-full">
-              <div className="ml-10 w-[100vw] ">
-                <div className="text-lg sm:text-3xl text-white font-bold">
-                  {item.attributes.topic}
-                </div>
-                <div className="text-sm sm:text-xl text-white">
-                  {new Date(item.attributes.date).toLocaleString('en-US', { day: 'numeric', month: 'long' }) + ' | ' + item.attributes.speaker}
-                </div>
+        {
+          upcomingTalks.length === 0 ? <div className="snap-center snap-always flex items-center w-full bg-scroll bg-center bg-cover bg-no-repeat bg-center bg-[url('/asset/pexels-alex-knight-2599244.jpg')] bg-gray-500 bg-blend-multiply h-full">
+            <div className="ml-10 w-[100vw] ">
+              <div className="text-lg sm:text-3xl text-white font-bold">
+                New Talks Coming Soon
+              </div>
+              <div className="text-sm sm:text-xl text-white">
               </div>
             </div>
-          )
-        })}
+          </div>
+            : upcomingTalks.map((item, idx) => {
+              return (
+                <div key={idx} className="snap-center snap-always flex items-center w-full bg-scroll bg-center bg-cover bg-no-repeat bg-center bg-[url('/asset/pexels-alex-knight-2599244.jpg')] bg-gray-500 bg-blend-multiply h-full">
+                  <div className="ml-10 w-[100vw] ">
+                    <div className="text-lg sm:text-3xl text-white font-bold">
+                      {item.attributes.topic}
+                    </div>
+                    <div className="text-sm sm:text-xl text-white">
+                      {new Date(item.attributes.date).toLocaleString('en-US', { day: 'numeric', month: 'long' }) + ' | ' + item.attributes.speaker}
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+        }
       </div>
       <div className="absolute top-1/2 left-2 transform -translate-y-1/2 flex items-center">
         <button

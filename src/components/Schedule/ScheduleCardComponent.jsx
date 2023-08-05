@@ -2,10 +2,16 @@ import { ImLocation2 } from 'react-icons/im'
 import { AiOutlineFieldTime } from 'react-icons/ai'
 import { BsCalendarDate } from 'react-icons/bs'
 import FeedbackModal from './feedback/FeedbackModal';
+import { useState } from 'react';
+
 const ScheduleCardComponent = (props) => {
+    const [showFullDescription, setShowFullDescription] = useState(false);
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
 
     return (
-        <div className="talk w-full p-4 rounded-lg bg-gray-50 my-3">
+        <div className={`talk w-full p-4 rounded-lg bg-gray-50 my-3 transition-max-height duration-300 ${showFullDescription ? 'max-h-full' : 'max-h-100'}`}>
             <div className="eventtitle flex flex-col lg:flex-row">
                 <div className='text-left text-2xl font-bold'>
                     {props.data.attributes.topic}
@@ -18,7 +24,16 @@ const ScheduleCardComponent = (props) => {
                     </span>
                 </div>
             </div>
-            <div className="eventDescription"> {props.data.attributes.description}</div>
+            <div className={`eventDescription transition delay-100 ${showFullDescription ?? 'truncate'}`}>
+                
+                {showFullDescription
+                    ? props.data.attributes.description
+                    : props.data.attributes.description.slice(0, 400) + '... '}
+                    <br/>
+                <button className='text-blue-500 hover:text-blue-700 focus:outline-none' onClick={toggleDescription}>
+                    {showFullDescription ? 'Read Less' : 'Read More'}
+                </button>
+            </div>
             <div className="eventDetails">
                 <div className='flex py-2'>
 
@@ -47,9 +62,9 @@ const ScheduleCardComponent = (props) => {
                 </button>
             </div> */}
                 {
-                    props.past ? (<FeedbackModal talkId={props.data.id} topic={props.data.attributes.topic}/>) : <></>
-            }
-            {/* {console.log(props.data.id,"=>",props.data.attributes.topic)} */}
+                    props.past ? (<FeedbackModal talkId={props.data.id} topic={props.data.attributes.topic} />) : <></>
+                }
+                {/* {console.log(props.data.id,"=>",props.data.attributes.topic)} */}
             </div>
         </div>
     )
