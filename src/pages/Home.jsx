@@ -7,12 +7,14 @@ import Schedule from '../components/home/Schedule';
 import Speaker from '../components/home/Speaker';
 import { useState,useEffect } from 'react';
 
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_STRAPI_URL;
+
 const Home = () => {
     const [data,setData] = useState([]) ;
     const [gallery,setGallery] = useState([]) ;
     useEffect(()=>{
         const fetchData = async () => {
-            await fetch('http://localhost:1337/api/gallery?populate=images').then(res => res.json()).then(json => setGallery(json.data.attributes.images.data)) ;
+            await fetch(`${API_BASE_URL}/api/gallery?populate=images`).then(res => res.json()).then(json => setGallery(json.data.attributes.images.data)) ;
         } 
         fetchData() ;
     },[])
@@ -20,7 +22,7 @@ const Home = () => {
     
     useEffect(()=>{
         const fetchTalks = async () => {
-            const fetchData = await fetch('http://localhost:1337/api/talks') ;
+            const fetchData = await fetch(`${API_BASE_URL}/api/talks`) ;
             const jsonData = await fetchData.json() ;
             setData(jsonData.data) ;
         }

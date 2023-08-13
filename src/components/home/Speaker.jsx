@@ -2,11 +2,12 @@ import SpeakerCard from "../Speaker/SpeakerCard";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { useState, useEffect } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_STRAPI_URL;
 const Speaker = () => {
     const [speakers, setSpeakers] = useState([]);
     useEffect(() => {
         const fetchTalks = async () => {
-            const fetchData = await fetch('http://localhost:1337/api/speakers?populate=*');
+            const fetchData = await fetch(`${API_BASE_URL}/api/speakers?populate=*`);
             const jsonData = await fetchData.json();
             setSpeakers(jsonData.data);
         }
@@ -39,7 +40,7 @@ const Speaker = () => {
                         </div>
                     </div> : speakers.map((item, idx) => (
                         <div key={idx}>
-                            <a target="_blank" href={`http://localhost:1337${item.attributes.cv.data.attributes.url}`}>
+                            <a target="_blank" href={`${API_BASE_URL}${item.attributes.cv.data.attributes.url}`}>
                                 <SpeakerCard key={idx} speaker={item} />
                             </a>
                         </div>

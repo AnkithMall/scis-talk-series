@@ -6,7 +6,7 @@ import {
   import { BsFillRocketTakeoffFill } from "react-icons/bs";
 const AboutCardsComponent = (prop) => (
     <>
-        <Card className="card mt-6 w-[280px] mx-10 sm:mx-7 mb-6 h-[280px] overflow-y-scroll">
+        <Card className="card mt-6 w-[288px] mx-10 sm:mx-6 mb-6 h-[288px] overflow-y-scroll">
             <CardBody >
                 {/* <BsFillRocketTakeoffFill className="text-blue-500 w-12 h-12 mb-4 mx-auto" /> */}
                 <Typography variant="h5" color="blue-gray" className="mb-2 text-center">

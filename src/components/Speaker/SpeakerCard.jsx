@@ -1,9 +1,11 @@
 import { useEffect,useState } from "react";
+
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_STRAPI_URL;
 const SpeakerCard = (props) => {
         const [img,setImg] = useState('') ;
         const [name,setName] = useState('') ;
         useEffect(() => {
-            setImg("http://localhost:1337"+props.speaker.attributes.img.data.attributes.url) ;
+            setImg(API_BASE_URL+props.speaker.attributes.img.data.attributes.url) ;
             setName(props.speaker.attributes.name) ;
         },[props.speaker.attributes.img.data.attributes.url,props.speaker.attributes.name])
 

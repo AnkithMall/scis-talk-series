@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_STRAPI_URL;
 const FormComponent = (props) => {
   const [formData, setFormData] = useState({
     talkId: props.id,
@@ -19,7 +20,7 @@ const FormComponent = (props) => {
   };
   const handleCreateRecord = async () => {
     try {
-        const response = await fetch('http://localhost:1337/api/feedbacks', {
+        const response = await fetch(`${API_BASE_URL}/api/feedbacks`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
